@@ -12,12 +12,13 @@
 
 ## 使用方法
 
-运行`install.sh`自动安装，运行`run_game.sh`、`run_game_v2.sh`、`run_game_script_generate.sh`其中之一都可直接运行，区别如下：
+运行`install.sh`自动安装，运行`run_game.sh`、`run_game_v2.sh`、`run_game_script_generate.sh`其中之一都可直接启动游戏，区别如下：
 
 * `run_game.sh`中只有一条`docker run`命令
 * `run_game_v2.sh`中使用变量代替部分参数，便于调整配置
 * `run_game_script_generate.sh`用于生成`docker run`，其中同样使用变量代替部分参数，加入了插件挂载的变量和功能，并将选项拆分成不同函数添加了一些检查和提示（但是是英文的，但是很简单）。
-* 详见[帮助信息.md](帮助信息.md)
+
+详见[帮助信息.md](帮助信息.md)
 
 
 
