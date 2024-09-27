@@ -59,7 +59,7 @@ function container_cfg_mount {
 }
 
 function container_addons_mount {
-    if test -z "${addons_dirs}" ; then return 0 ; fi
+    if test -z ${addons_dirs} ; then return 0 ; fi
     for DIR in ${addons_dirs} ; do {
         if ! test -d ${DIR} ; then
             echo "The path ${DIR} is not a available directory path." >&2 ; exit 1
