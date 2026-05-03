@@ -1,6 +1,19 @@
-docker run -itd --name l4d2 \
--p 27015:27015
--v /lib/games/steam/left4dead2:/home/steam/left4dead2 \
+#!/bin/bash
+source config.sh
+export game_hostname=left4dead2
+export game_local_port=31001
+#export game_cfg_local_path=/lib/games/l4d2_server_file/server.cfg
+export game_map=c2m1_highway
+export game_cvars="+sv_gametypes coop +hostname ${game_hostname} +exec server.cfg +map ${game_map}"
+
+#test -e ${game_cfg_local_path} || {echo "error var: game_cfg_local_path" >&2 ; exit 1; }
+
+echo \
+docker run -itd --name l4d2_${game_hostname} \
+-p ${game_local_port}:27015/tcp -p ${game_local_port}:27015/udp \
+-v ${game_local_path}:${game_container_path} \
 cm2network/steamcmd:latest \
-/home/steam/left4dead2/srcds_run -game left4dead2 -debug -insecure \
-+sv_lan 1 +sv_gametypes "coop" +hostname "left4dead2" +exec server.cfg +map c2m1_highway
+${game_container_path}/srcds_run -game left4dead2 -debug -insecure ${game_cvars} \
+| bash
+
+#-v ${game_cfg_local_path}:${game_container_path}/left4dead2/cfg/server.cfg \

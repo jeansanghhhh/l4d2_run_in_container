@@ -1,5 +1,5 @@
 #!/bin/bash
-export execute_mode=true
+export execute_mode=dry-run
 export script_path=$(mktemp -u /tmp/run_l4d2_XXXX.sh)
 export container_name=
 export game_local_port=
@@ -91,11 +91,9 @@ game_start
 
 
 if test "${execute_mode}" == "true" ; then
-    while test -f ${script_path} ; do
-        script_path=$(mktemp -u /tmp/run_l4d2_XXXX.sh)
-    done
+    test -z script_path && script_path=$(mktemp -u /tmp/run_l4d2_XXXX.sh)
     echo "${script_path}"
-    generate_script ${script_path} && bash ${script_path}
+    generate_script > ${script_path} && bash ${script_path}
     echo "done."
 else
     generate_script
